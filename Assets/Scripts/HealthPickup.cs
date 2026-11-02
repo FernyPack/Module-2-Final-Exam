@@ -1,16 +1,15 @@
 using UnityEngine;
 
-// Green orb that gives the player health back.
+// Green orb that gives back health. Like Hazard, it only raises an event.
 public class HealthPickup : MonoBehaviour
 {
-    public int healAmount = 1;
+    [Range(0f, 1f)] public float healFraction = 0.25f;
 
     void OnTriggerEnter(Collider other)
     {
-        PlayerController player = other.GetComponent<PlayerController>();
-        if (player == null) return;
+        if (!other.CompareTag("Player")) return;
 
-        player.Health += healAmount;  // property clamps at MaxHealth
+        GameEvents.RaisePickupCollected(healFraction);
         Destroy(gameObject);
     }
 }

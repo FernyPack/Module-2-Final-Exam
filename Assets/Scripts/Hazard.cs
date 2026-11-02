@@ -1,16 +1,16 @@
 using UnityEngine;
 
-// Obstacle that hurts the player on contact.
+// Dangerous obstacle. On contact with the player it raises an event and disappears.
+// It does NOT call any method on the player - PlayerHealth hears the event and applies damage.
 public class Hazard : MonoBehaviour
 {
-    public int damage = 1;
+    [Range(0f, 1f)] public float damageFraction = 0.25f;   // a quarter of the bar per hit
 
     void OnTriggerEnter(Collider other)
     {
-        PlayerController player = other.GetComponent<PlayerController>();
-        if (player == null) return;
+        if (!other.CompareTag("Player")) return;
 
-        player.Health -= damage;      // property clamps at 0 and restarts the game if needed
+        GameEvents.RaiseObstacleHit(damageFraction);
         Destroy(gameObject);
     }
 }

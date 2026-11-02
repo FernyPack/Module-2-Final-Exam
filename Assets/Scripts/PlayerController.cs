@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// Dodge Run - moves the player and owns the player's health.
+// Dodge Run - moves the player. Health now lives in the HealthSO asset (see PlayerHealth).
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
@@ -9,42 +9,6 @@ public class PlayerController : MonoBehaviour
     public float xLimit = 9f;
     public float zMin = -2f;
     public float zMax = 4f;
-
-    [Header("Health")]
-    [SerializeField] private int maxHealth = 3;
-
-    private int health;               // private backing field - only the property touches it
-    private bool isDead;
-
-    public int MaxHealth
-    {
-        get { return maxHealth; }
-    }
-
-    // Every change to health goes through here, so the rules are enforced in one place:
-    // the value is clamped to 0..maxHealth, and reaching 0 restarts the game automatically.
-    public int Health
-    {
-        get { return health; }
-        set
-        {
-            if (isDead) return;                          // ignore hits/heals after death
-
-            health = Mathf.Clamp(value, 0, maxHealth);
-
-            if (health == 0)
-            {
-                isDead = true;
-                if (GameManager.Instance != null)
-                    GameManager.Instance.RestartGame();
-            }
-        }
-    }
-
-    void Awake()
-    {
-        health = maxHealth;
-    }
 
     void Update()
     {
