@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         if (hudStyle == null)
         {
             hudStyle = new GUIStyle(GUI.skin.label) { fontSize = 26, fontStyle = FontStyle.Bold };
-            hudStyle.normal.textColor = Color.white;
+            hudStyle.normal.textColor = Color.black;
             bigStyle = new GUIStyle(hudStyle) { fontSize = 48, alignment = TextAnchor.MiddleCenter };
             hintStyle = new GUIStyle(hudStyle) { fontSize = 18, fontStyle = FontStyle.Normal };
         }

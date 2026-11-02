@@ -131,14 +131,14 @@ public class PauseMenu : MonoBehaviour
         scaler.referenceResolution = new Vector2(1920f, 1080f);
 
         // Dimmed background
-        RectTransform dim = MakeImage("Menu", canvasGO.transform, new Color(0f, 0f, 0f, 0.6f));
+        RectTransform dim = MakeImage("Menu", canvasGO.transform, new Color(0f, 0f, 0f, 0.35f));
         Stretch(dim);
         menuGroup = dim.gameObject.AddComponent<CanvasGroup>();
         menuGroup.alpha = 0f;
         menuGroup.blocksRaycasts = false;
         menuGroup.interactable = false;
 
-        RectTransform panel = MakeImage("Panel", dim, new Color(0.1f, 0.1f, 0.12f, 0.95f));
+        RectTransform panel = MakeImage("Panel", dim, new Color(0.95f, 0.95f, 0.95f, 0.97f));
         panel.anchorMin = panel.anchorMax = new Vector2(0.5f, 0.5f);
         panel.sizeDelta = new Vector2(460f, 440f);
 
@@ -147,7 +147,7 @@ public class PauseMenu : MonoBehaviour
         MakeButton("Restart", panel, new Vector2(0f, -50f), Restart);
         MakeButton("Quit", panel, new Vector2(0f, -140f), Quit);
         MakeText("Hint", panel, "Esc to resume", 22, new Vector2(0f, -200f), new Vector2(420f, 30f))
-            .color = new Color(1f, 1f, 1f, 0.6f);
+            .color = new Color(0f, 0f, 0f, 0.6f);
 
         // Full-screen black used for the quit fade
         RectTransform fade = MakeImage("QuitFade", canvasGO.transform, new Color(0f, 0f, 0f, 0f));
@@ -168,9 +168,9 @@ public class PauseMenu : MonoBehaviour
         Button button = rt.gameObject.AddComponent<Button>();
         button.targetGraphic = img;
         ColorBlock colors = button.colors;
-        colors.normalColor = new Color(0.25f, 0.25f, 0.3f);
-        colors.highlightedColor = new Color(0.35f, 0.55f, 0.95f);
-        colors.pressedColor = new Color(0.2f, 0.35f, 0.7f);
+        colors.normalColor = new Color(0.82f, 0.82f, 0.85f);
+        colors.highlightedColor = new Color(0.6f, 0.75f, 1f);
+        colors.pressedColor = new Color(0.45f, 0.6f, 0.9f);
         colors.selectedColor = colors.normalColor;
         colors.fadeDuration = 0.1f;
         button.colors = colors;
@@ -190,7 +190,7 @@ public class PauseMenu : MonoBehaviour
         text.fontSize = size;
         text.fontStyle = FontStyle.Bold;
         text.alignment = TextAnchor.MiddleCenter;
-        text.color = Color.white;
+        text.color = Color.black;
         text.raycastTarget = false;
         RectTransform rt = text.rectTransform;
         rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
