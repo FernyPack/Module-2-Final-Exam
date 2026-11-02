@@ -2,8 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// Tracks survival time, draws the HUD text and restarts the game.
-// It never gets called by the player: it listens for the Health asset's Depleted event.
+// Tracks time, draws the HUD, restarts when health runs out.
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
@@ -35,10 +34,9 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (IsGameOver) return;
-        survivalTime += Time.deltaTime;   // real seconds, whatever the frame rate
+        survivalTime += Time.deltaTime;
     }
 
-    // 4th obstacle hit -> health reaches 0 -> Depleted event -> restart
     void HandleHealthDepleted()
     {
         if (IsGameOver) return;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// Green orb that gives back health. Like Hazard, it only raises an event.
+// Heals the player through an event.
 public class HealthPickup : MonoBehaviour
 {
     [Range(0f, 1f)] public float healFraction = 0.25f;

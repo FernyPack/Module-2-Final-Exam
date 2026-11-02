@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// Testing tool: lock the game to different frame rates to see how movement behaves.
-// 1 = 30 FPS, 2 = 60 FPS, 3 = 144 FPS, 0 = unlimited.
+// Test tool: 1 = 30 FPS, 2 = 60, 3 = 144, 0 = unlimited
 public class FrameRateTester : MonoBehaviour
 {
     int target = -1;
@@ -13,7 +12,7 @@ public class FrameRateTester : MonoBehaviour
 
     void Start()
     {
-        QualitySettings.vSyncCount = 0;   // vSync would override targetFrameRate
+        QualitySettings.vSyncCount = 0;
     }
 
     void Update()
@@ -27,7 +26,6 @@ public class FrameRateTester : MonoBehaviour
             if (kb.digit0Key.wasPressedThisFrame) SetTarget(-1);
         }
 
-        // average the real FPS over half a second
         frames++;
         timer += Time.unscaledDeltaTime;
         if (timer >= 0.5f)

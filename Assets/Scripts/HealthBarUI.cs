@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-// Screen health bar. Builds its own Canvas out of plain UI GameObjects (no imported art)
-// and redraws itself whenever the Health ScriptableObject raises HealthChanged.
+// Health bar built from UI GameObjects. Updates on HealthChanged.
 public class HealthBarUI : MonoBehaviour
 {
     [SerializeField] private HealthSO health;
@@ -48,7 +47,6 @@ public class HealthBarUI : MonoBehaviour
 
     void Update()
     {
-        // slide the bar toward the new value instead of snapping
         float t = 1f - Mathf.Exp(-animateSpeed * Time.deltaTime);
         shownFraction = Mathf.Lerp(shownFraction, targetFraction, t);
         if (Mathf.Abs(shownFraction - targetFraction) < 0.001f) shownFraction = targetFraction;
@@ -65,7 +63,6 @@ public class HealthBarUI : MonoBehaviour
 
     void BuildBar()
     {
-        // Canvas
         GameObject canvasGO = new GameObject("HealthBarCanvas", typeof(Canvas), typeof(CanvasScaler));
         canvasGO.transform.SetParent(transform, false);
         Canvas canvas = canvasGO.GetComponent<Canvas>();
@@ -75,7 +72,6 @@ public class HealthBarUI : MonoBehaviour
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(1920f, 1080f);
 
-        // Border / background
         RectTransform border = MakeRect("Border", canvasGO.transform, new Color(0f, 0f, 0f, 0.85f));
         border.anchorMin = border.anchorMax = new Vector2(0f, 1f);
         border.pivot = new Vector2(0f, 1f);
@@ -85,14 +81,13 @@ public class HealthBarUI : MonoBehaviour
         RectTransform back = MakeRect("Background", border, new Color(0.25f, 0.05f, 0.05f, 1f));
         Stretch(back, 3f);
 
-        // Fill - width is driven by anchorMax.x, so no sprite is needed
         fillRect = MakeRect("Fill", back, fullColor);
         fillRect.anchorMin = Vector2.zero;
         fillRect.anchorMax = Vector2.one;
         fillRect.offsetMin = fillRect.offsetMax = Vector2.zero;
         fillImage = fillRect.GetComponent<Image>();
 
-        // Three dividers so the four "quarters" are visible
+        // Quarter markers
         dividers = new RectTransform[3];
         for (int i = 0; i < 3; i++)
         {

@@ -1,14 +1,13 @@
 using UnityEngine;
 
-// Connects the collision events to the Health ScriptableObject.
-// Sits on the Player. No other script calls into this one - it only listens.
+// Applies collision events to the Health ScriptableObject.
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private HealthSO health;
 
     void Awake()
     {
-        health.ResetHealth();   // fresh, full bar at the start of every run
+        health.ResetHealth();
     }
 
     void OnEnable()
