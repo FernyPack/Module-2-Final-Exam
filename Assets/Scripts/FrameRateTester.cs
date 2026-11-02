@@ -47,7 +47,7 @@ public class FrameRateTester : MonoBehaviour
         if (style == null)
         {
             style = new GUIStyle(GUI.skin.label) { fontSize = 18, alignment = TextAnchor.UpperRight };
-            style.normal.textColor = Color.yellow;
+            style.normal.textColor = Color.black;
         }
 
         string targetText = target < 0 ? "unlimited" : target.ToString();

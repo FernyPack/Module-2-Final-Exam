@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     float survivalTime;
     GUIStyle hudStyle;
     GUIStyle bigStyle;
+    GUIStyle hintStyle;
 
     void Awake()
     {
@@ -57,11 +58,13 @@ public class GameManager : MonoBehaviour
             hudStyle = new GUIStyle(GUI.skin.label) { fontSize = 26, fontStyle = FontStyle.Bold };
             hudStyle.normal.textColor = Color.white;
             bigStyle = new GUIStyle(hudStyle) { fontSize = 48, alignment = TextAnchor.MiddleCenter };
+            hintStyle = new GUIStyle(hudStyle) { fontSize = 18, fontStyle = FontStyle.Normal };
         }
 
         GUI.Label(new Rect(20, 15, 500, 40),
             "Health: " + playerHealth.CurrentHealth.ToString("0") + " / " + playerHealth.MaxHealth.ToString("0"), hudStyle);
         GUI.Label(new Rect(20, 50, 500, 40), "Time: " + survivalTime.ToString("0.0") + "s", hudStyle);
+        GUI.Label(new Rect(20, 135, 500, 40), "Esc - Pause", hintStyle);
 
         if (IsGameOver)
             GUI.Label(new Rect(0, 0, Screen.width, Screen.height), "GAME OVER\nrestarting...", bigStyle);
